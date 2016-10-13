@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Gibson Collection</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="stylesheets/radar-chart.css">
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/right-bar.css">
+        <script type="text/javascript" src="packages/d3.min.js"></script>
+        <script type="text/javascript" src="scripts/scatterplot.js"></script>
+        <script type="text/javascript" src="scripts/anthologyList.js"></script>
+        <script type="text/javascript" src="scripts/periodicals.js"></script>
+        <script type="text/javascript" src="scripts/glyphCompare.js"></script>
+        <script type="text/javascript" src="scripts/coverColors/getCoverColors.js"></script>
+        <script type="text/javascript" src="scripts/detailView.js"></script>
+        <script type="text/javascript" src="scripts/tooltip.js"></script>
+        <script type="text/javascript" src="scripts/tagCloud.js"></script>
+        <script type="text/javascript" src="scripts/about.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+        <script type="text/javascript" src="packages/color-thief.min.js"></script>
+        <script type="text/javascript" src="packages/radar-chart.js"></script>
+        <script type="text/javascript" src="packages/d3-queue.min.js"></script>
+        <script type="text/javascript" src="scripts/coverColors/getCoverColors.js"></script>
+      
+    </head>
+    <body>
+    <script>
+            d3.selection.prototype.moveToFront = function(){
+                return this.each(function(){
+                    this.parentNode.appendChild(this);
+                })
+            }
+            d3.selection.prototype.moveToBack = function() {  
+                return this.each(function() { 
+                    var firstChild = this.parentNode.firstChild; 
+                    if (firstChild) { 
+                        this.parentNode.insertBefore(this, firstChild); 
+                    } 
+                });
+            };
+        /* Use to export the anthologies' branch lists to a json file called anthologies.json. Use when recreating the mds */
+        // anthologies = new AnthologyList("./scripts/dataprep/exportAnthologies.php");
+        anthologies = new AnthologyList();
+    </script> 
+        <select name = "mappings" onchange="anthologies.changeMapping(value)">
+            <option  selected value="relative_total.csv">Relative Total</option>
+            <option value="absolute_total.csv">Absolute Total</option>
+            <option value="relative_branches.csv">Relative Branches</option>
+            <option value="relative_branchesSize.csv">Relative Branches and Size</option>
+            <option value="absolute_branches.csv">Absolute Branches</option>
+        </select>
+    <button id="about-btn">About</button>
+    <button data-zoom="+1">Zoom In</button>
+    <button data-zoom="-1">Zoom Out</button>
+    <div class ="right-bar">
+            <div class="tagcloud">
+                <span><button class="dropbtn" id="tagcloud-button">Keywords</button></span>
+            </div>
+            <div class="filter">
+                <span><button class="dropbtn" id="filter-button">Filter</button></span>
+            </div>
+    </div>
+    </div>
+    <div id="detail-view"></div>    
+    </body>
+</html>

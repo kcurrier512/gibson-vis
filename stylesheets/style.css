@@ -1,0 +1,144 @@
+.radar-chart.filtered{
+	opacity: .2;
+}
+
+.radar-chart .area.highlight{
+	stroke-width: 2;
+	fill-opacity: .6;
+}
+
+.radar-chart.filtered .area.highlight{
+	stroke-width: 1;
+}
+
+.radar-chart .area{
+    fill-opacity: .5;
+    stroke-width: .5; 
+}
+
+.radar-chart .area.focused {
+    fill-opacity: .8;
+    stroke-width: .5;
+}
+
+.radar-chart .axis line{
+	pointer-events: none;
+	opacity: .3;
+	stroke-width: 0;
+}
+
+.radar-chart.focus .axis line{
+  opacity: .7;
+  stroke-width: 0;
+}
+
+.radar-chart.clicked .axis line{
+  opacity: .8;
+  stroke-width: .5;
+  fill: black;
+}
+
+.radar-chart.clicked .area {
+  fill-opacity: .9;
+  /*stroke-width: 1.5;*/
+  stroke-width: 1;
+}
+text{
+	font-family: sans-serif;
+}
+
+html,body{
+	background-color: white;
+	height: 100%;
+	overflow: hidden;
+}
+
+.svg-container{
+	background-color: white;
+	height: 95%;
+	width: 70%;
+}
+
+.svg-content{
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+#detail-view {
+	display: none;
+}
+
+#detail-view.show{
+	pointer-events: none;
+	display: inline;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	left: 10px;
+	top: 50px;
+	width: 300px;
+	height: 50%;
+	z-index: 10;
+	/*border: 3px solid gray;*/
+	opacity: .9;
+	overflow-y: auto;
+	padding: 5px 5px 5px 5px;
+}
+
+#detailContent{
+	pointer-events: auto;
+	overflow-y: auto;
+	display: block;
+	background-color: white;
+	margin-top: 5px;
+	margin-right: auto;
+	margin-left: auto;
+	max-height: 90%;
+	width: 200px;
+	opacity: .75;
+	padding: 5px 5px 5px 5px;
+
+}
+
+#detail-view.show p, li{
+	font-family: sans-serif;
+	margin-bottom: 2px;
+	margin-top: 5px;
+}
+.glyph-outline{
+	background-color: white;
+	border: 3px solid gray;
+}
+
+#glyph-compare{
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	width: 215px;
+	height: 240px;
+	z-index: 10;
+	opacity: .9;
+}
+
+#glyph-compare .area{
+	fill-opacity: .8;
+}
+
+#glyph-compare .axis line{
+	stroke-width: 1;
+	opacity: .5;
+}
+
+.about{
+	z-index: 15;
+	width: 600px;
+	opacity: .9;
+	font-family: sans-serif;
+	border: 2px solid grey;
+	background-color: white;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	padding: 5px 5px 5px 5px;
+}
