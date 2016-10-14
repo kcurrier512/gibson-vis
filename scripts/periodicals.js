@@ -106,7 +106,6 @@ Periodicals.prototype.createDropdown = function(){
 		this.periodicalObjects[i].periodical_title = this.periodicalObjects[i].periodical_title.replace(/\//g, '\ ');
 		var span = document.createElement('span');
 		var description = document.createTextNode(this.periodicalObjects[i].periodical_title);
-		//Added
 		var number = document.createTextNode(" [" + this.periodicalObjects[i].stories.length + ", " + this.periodicalObjects[i].anthologies.length +"]" );
 		checkbox = document.createElement('input');
 		this.selected.push(this.periodicalObjects[i].periodical_id);

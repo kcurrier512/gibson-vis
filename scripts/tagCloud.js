@@ -84,19 +84,26 @@ TagCloud.prototype.createKeywordDropdown = function(keywordArray, max, min) {
 		})
 	tagCloudContent.exit().remove();
 
-	tagCloudContent.on("mouseover", function(d){
-		tc.highlightGlyphs(d[0], true);
-		d3.select(this).style("font-weight", "bold");
+	tagCloudContent.on("click", function(d){
+		if(d3.select(this).classed("clicked")){
+			d3.select(this).classed("clicked", false);
+			tc.highlightGlyphs(d[0], false);
+	 		d3.select(this).style("font-weight", "normal");
+		}else{
+			d3.select(this).classed("clicked", true);
+			tc.highlightGlyphs(d[0], true);
+			d3.select(this).style("font-weight", "bold");
+		}
+		
 	})
-	.on("mouseout", function(d){
-		tc.highlightGlyphs(d[0], false);
-		d3.select(this).style("font-weight", "normal");
-	});
+	// .on("mouseout", function(d){
+	// 	tc.highlightGlyphs(d[0], false);
+	// 	d3.select(this).style("font-weight", "normal");
+	// });
 
 	tagCloudContent.transition().style("font-size", function(d){
 		return tc.getFontSize(d[1], min, max)
 	});
-
 
 	d3.select("#tagcloud-button")
 	.on("click", function(d){
