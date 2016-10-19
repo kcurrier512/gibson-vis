@@ -80,7 +80,8 @@ TagCloud.prototype.createKeywordDropdown = function(keywordArray, max, min) {
 	var tagCloudContent = d3.select("g#tagCloudContent").selectAll("p").data(keywordArray);
 	tagCloudContent.enter().append("p");
 	tagCloudContent.text(function(d){
-			return d[0];
+			return d[0] + " [" + d[1] + "]";
+			// return d[0];
 		})
 	tagCloudContent.exit().remove();
 
@@ -96,10 +97,6 @@ TagCloud.prototype.createKeywordDropdown = function(keywordArray, max, min) {
 		}
 		
 	})
-	// .on("mouseout", function(d){
-	// 	tc.highlightGlyphs(d[0], false);
-	// 	d3.select(this).style("font-weight", "normal");
-	// });
 
 	tagCloudContent.transition().style("font-size", function(d){
 		return tc.getFontSize(d[1], min, max)

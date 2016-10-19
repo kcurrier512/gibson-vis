@@ -46,6 +46,7 @@ var Periodicals = function(anthologies, periodicalObjects, tagCloud){
 			allPeriodicals = true;
 		}
 		per.createUnfilteredList(allPeriodicals);
+		per.redrawFilteredList();
 	})
 }
 
@@ -69,12 +70,48 @@ Periodicals.prototype.createUnfilteredList = function(allPeriodicals){
 	}
 }
 
+Periodicals.prototype.redrawFilteredList = function(){
+	if(this.selected.length == 0){
+		d3.select("#filter-content").selectAll("span").style("display", "inline-block");
+	}else{
+			var anthTitles, relevantPeriodicals = [], list;
+	this.selected.forEach(function(id){
+		anthTitles = per.attributeFromID(id, "anthologies");
+	});
+	anthTitles.forEach(function(title){
+		list = per.periodicalsFromAnthology(title)
+		list.forEach(function(item){
+			relevantPeriodicals.push("a" + item);
+		})
+	});
+
+	d3.select("#filter-content").selectAll("span").style("display", "none");
+	
+	relevantPeriodicals.forEach(function(periodical){
+		d3.selectAll("span#" + periodical).style("display", "inline-block");
+	})
+	}
+
+}
+
+Periodicals.prototype.fillFilteredList = function(){
+	d3.select("#filter-content").selectAll("span").style("display", "inline-block");
+}
+
 Periodicals.prototype.attributeFromID = function(givenID, attribute){
 	var nest = d3.nest()
 				.key(function(d){return d.periodical_id})
 				.entries(this.periodicalObjects);
 	var filterContent = nest.filter(function(d){return d.key == givenID});
 	return filterContent[0].values[0][attribute];	
+}
+
+Periodicals.prototype.periodicalsFromAnthology = function(title){
+	var nest = d3.nest()
+				.key(function(d){return d.anthologyTitle})
+				.entries(this.anthologies);
+	var filterContent = nest.filter(function(d){return d.key == title});
+	return filterContent[0].values[0]["periodicals"];	
 }
 
 Periodicals.prototype.toggleDropdown = function(){
@@ -114,6 +151,7 @@ Periodicals.prototype.createDropdown = function(){
 		checkbox.className = "checkbox";
 		checkbox.setAttribute("id", this.periodicalObjects[i].periodical_id);
 		checkbox.setAttribute("checked", true);
+		span.setAttribute("id", "a" +this.periodicalObjects[i].periodical_id);
 		span.style.fontSize = this.getFontSize(this.periodicalObjects[i].anthologies, max);
 
 		filterContent.appendChild(span);
